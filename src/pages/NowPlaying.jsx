@@ -3,7 +3,6 @@ import { useAxios } from '../hook/useAxios'
 import { API_KEY } from '../hook/useAnv'
 import CustomCard from '../components/CustomCard'
 
-
 function NowPlaying() {
   const [product, setProduct] = useState([])
   const [isLoading, setIsloading] = useState(false)
