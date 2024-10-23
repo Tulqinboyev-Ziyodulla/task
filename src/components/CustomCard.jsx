@@ -26,11 +26,11 @@ export default function CustomCard({item}) {
             <p className='line-clamp-3'> {item.overview}  </p>
         </Typography>
       </CardContent>
-      <CardActions>
+      <CardActions className=' ml-20'>
         <Button size="large">
           <SaveAltIcon/>
         </Button>
-        <Button size="large">
+        <Button size="large" sx={{ color: 'red'}}>
           <FavoriteBorderIcon/>
         </Button>
       </CardActions>
