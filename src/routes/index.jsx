@@ -5,6 +5,7 @@ import Popular from '../pages/Popular'
 import TopRated from '../pages/TopRated'
 import UpComing from '../pages/UpComing'
 import { Route, Routes } from 'react-router-dom'
+import SingleMovie from '../pages/SingleMovie'
 
 
 function CustomRoutes() {
@@ -23,10 +24,16 @@ function CustomRoutes() {
             id:3,
             path:PATH.topRated,
             element:<TopRated/>
-        }, {
+        }, 
+        {
             id:4,
             path:PATH.upComing,
             element:<UpComing/>
+        },
+        {
+            id:5,
+            path:PATH.singleMovie,
+            element:<SingleMovie/>
         },
     ]
     return (

@@ -5,42 +5,49 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { IMG_URL } from '../hook/useAnv';
+import { IMG_URL } from '../hook/useEnv';
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import { useNavigate } from 'react-router-dom';
 
 export default function CustomCard({ item }) {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const navigate = useNavigate();
+
+  const handleMouseEnter = () => setIsHovered(true);
+  const handleMouseLeave = () => setIsHovered(false);
+
   return (
-    <Card sx={{
-      maxWidth: 345,
-      boxShadow: '0px 5px 15px rgba(0,0,0,0.2)',
-      borderRadius: '16px',
-      transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
-      '&:hover': {
-        boxShadow: '0px 10px 25px rgba(0,0,0,0.3)',
-      },
-    }}
-    >
-      <CardMedia
-        sx={{
-          borderTopLeftRadius: '16px',
-          borderTopRightRadius: '16px',
-          objectFit: 'cover',
-          cursor: 'pointer',
-          height: '250px'
-        }}
-        component="img"
-        alt={item.original_title}
-        height="200"
-        image={item.backdrop_path ? `${IMG_URL}${item.backdrop_path}` : '/placeholder-image.jpg'}
-      />
+    <Card className='cursor-pointer' sx={{ maxWidth: 345 }}>
+      <div onClick={() => navigate(`/movie/${item.id}`)} className="w-full h-[300px] relative">
+        <CardMedia
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`absolute duration-300 w-full ${isHovered ? "left-[-100%]" : "left-0"}`}
+          component="img"
+          alt={item.original_title}
+          loading="lazy"
+          sx={{ height: 300 }}
+          image={`${IMG_URL}${item.poster_path}`}
+        />
+        <CardMedia
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={`absolute duration-300 w-full ${isHovered ? "right-0" : "right-[-100%]"}`}
+          component="img"
+          alt={item.original_title}
+          loading="lazy"
+          sx={{ height: 300 }}
+          image={`${IMG_URL}${item.backdrop_path}`}
+        />
+      </div>
       <CardContent sx={{ padding: '16px 24px' }}>
         <Typography gutterBottom variant="h5" component="div">
           <strong className="text-[20px]">{item.original_title}</strong>
         </Typography>
         <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          <p className="line-clamp-3">{item.overview}</p>
+          <span className="line-clamp-3">{item.overview}</span>
         </Typography>
       </CardContent>
       <CardActions sx={{ justifyContent: 'space-between', padding: '8px 24px' }}>
@@ -67,6 +74,7 @@ export default function CustomCard({ item }) {
           <SaveAltIcon />
         </Button>
         <Button
+          onClick={() => navigate(`/movie/${item.id}`)}
           size="large"
           sx={{
             color: 'blue',

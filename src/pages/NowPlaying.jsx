@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useAxios } from '../hook/useAxios';
-import { API_KEY } from '../hook/useAnv';
+import { API_KEY } from '../hook/useEnv';
 import CustomCard from '../components/CustomCard';
+import MoviePage from '../components/MoviePage'
 
 function NowPlaying() {
   const [product, setProduct] = useState([]);
@@ -32,7 +33,9 @@ function NowPlaying() {
   
 
   return (
-    <div className='p-10 bg-[#f1f1f1]'>
+    <>
+    <MoviePage URL={"now_playing"} />
+    <div className='p-10'>
       <ul className="flex flex-wrap justify-between gap-4">
         {product.map(item => (
           <li key={item.id} className="mx-auto">
@@ -41,6 +44,7 @@ function NowPlaying() {
         ))}
       </ul>
     </div>
+    </>
   );
 }
 
