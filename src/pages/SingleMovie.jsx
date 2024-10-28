@@ -76,7 +76,7 @@ function SingleMovie() {
               />
             ))
           ) : (
-            moreOpen && <div>"No more videos"</div>
+            moreOpen && <div>"No videos"</div>
           )}
         </div>
       </div>
